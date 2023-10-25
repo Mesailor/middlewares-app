@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const usersRouter = require('./routers/users');
+const denyTooManyMiddlware = require('./middlewares/deny_too_many');
 
 app.use(express.json());
 app.use('/api/users', usersRouter);
 
-app.get('/', (req, res) => {
+app.get('/', denyTooManyMiddlware, (req, res) => {
     res.send('Hello World!');
 });
 
