@@ -13,11 +13,12 @@ router.post('/', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
     const user = new User({
-        name: value.name
+        name: value.name,
+        password: value.password
     });
 
     await user.save();
-    return res.send(user);
+    return res.send(`User: ${user.get('name')}, id: ${user.get('_id')}`);
 });
 
 module.exports = router;
